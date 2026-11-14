@@ -19,9 +19,9 @@ jobs:
       - name: Install dependencies
         run: |
           brew install libpng
-          # Ensure the compiler can find Homebrew's libpng headers
-          echo "CFLAGS=-I$(brew --prefix)/include" >> $GITHUB_ENV
-          echo "LDFLAGS=-L$(brew --prefix)/lib" >> $GITHUB_ENV
+          # Force GCC/Clang to look in Homebrew's directories natively
+          echo "C_INCLUDE_PATH=$(brew --prefix)/include" >> $GITHUB_ENV
+          echo "LIBRARY_PATH=$(brew --prefix)/lib" >> $GITHUB_ENV
 
       - name: Compile ibootim
         run: make
